@@ -1,0 +1,112 @@
+<div class="page_wrapper">
+    <div  aria-live="polite" aria-atomic="true"
+        class="d-flex justify-content-center align-items-center w-100 hk_toast" >
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="width: 205px;">
+            <div class="toast-header">
+                <img [src]="toasticon" class="rounded me-2" alt="..." />
+                <strong class="me-auto">Subscription Enabled!</strong>
+            </div>
+        </div>
+    </div>
+    <div class="topbar_wrapper">
+        <div class="notificationToast">
+            <a href="tel:021111111111" className="d-flex align-items-center">
+                <img [src]="call" alt="Logo" />
+                (021)-111-111-111
+            </a>
+        </div>
+    </div>
+    <div class="logo_wrapper">
+        <div class="row">
+            <div class="col-sm-6 col-md-9 d-flex align-items-sm-center gap-4">
+                <div class="logo_area">
+                    <img [src]="logoImage" alt="Logo" />
+                </div>
+
+                <div class="menu-wrapper">
+                    <h5 
+                        class="cor-subs-text" 
+                        [ngClass]="{'cor-subs-text-active': isActive('/corporate-subscription')}" 
+                        routerLink="/corporate-subscription">
+                        Corporate Subscription
+                    </h5>
+                    <h5 
+                        class="cor-subs-text" 
+                        [ngClass]="{'cor-subs-text-active': isActive('/subscription')}" 
+                        routerLink="/subscription">
+                        Subscriptions
+                    </h5>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="logo_area text-right">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <span>A</span>
+                            <img [src]="arrowDown" alt="Logo" />
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" >Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="middleTabsCom minddingggg bg-light1 pt-5">
+        <!-- successfull toast subscription starts -->
+        
+        <!-- successfull toast subscription ends -->
+        <div class="container">
+            <h2 class="headddehead"> Subscription Enabled </h2>
+            <div class="position-relative">
+                <div class="tableWrape">
+                    <div class="table-responsive mainScroller">
+                        <table class="table table-hover">
+                            <thead class="">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Number</th>
+                                    <th scope="col">Subscription</th>
+                                    <th scope="col">Valid from</th>
+                                    <th scope="col">Valid till</th>
+                                    <th scope="col">CNIC</th>
+                                    <th scope="col">DOB</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Gender</th>
+                                    <th scope="col">Company</th>
+                                    <th scope="col">Department</th>
+                                    <th scope="col">Promo Code</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let readytogo of enabledSubscriptions">
+                                    <td>{{ readytogo.id }}</td>
+                                    <td class="titling_table">{{readytogo.user_subscription.user.name }}</td>
+                                    <td>{{ readytogo.user_subscription.user.phone }}</td>
+                                    <td>{{ readytogo.user_subscription.package.name }}</td>
+                                    <td>{{ readytogo.user_subscription.formated_start_date }}</td>
+                                    <td>{{ readytogo.user_subscription.formated_end_date }}</td>
+                                    <td>{{ readytogo.user_subscription.user.cnic }}</td>
+                                    <td>{{ readytogo.user_subscription.user.birth_date }}</td>
+                                    <td>{{ readytogo.user_subscription.user.email}}</td>
+                                    <td>{{ readytogo.user_subscription.user.gender }}</td>
+                                    <td>{{ readytogo.user_subscription.user.corporate_user.company_name }}</td>
+                                    <td>{{ readytogo.user_subscription.user.corporate_user.department}}</td>
+                                    <td>{{ readytogo.user_subscription.transaction.promo_code &&
+                                        readytogo.user_subscription.transaction.promo_code.code }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="wrpaingBtn buttonBottom001">
+                        <button class="cancelDelBtn" (click)="goBack()">
+                            GO BACK </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>

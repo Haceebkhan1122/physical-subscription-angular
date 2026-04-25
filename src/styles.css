@@ -1,0 +1,325 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+button {
+    border: none;
+    outline: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+}
+
+.tableWrape .table-hover>tbody>tr:hover>* {
+    background-color: #dcf4f4 !important;
+    cursor: pointer;
+}
+
+.tableWrape tr {
+    position: relative;
+}
+
+
+table th {
+    white-space: nowrap;
+}
+
+
+table td {
+    white-space: nowrap;
+}
+
+
+.reviewmodal .modal-content {
+    display: flex;
+    width: 502px;
+    height: 409px;
+    padding: 20px 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 21px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid var(--6, #F4F5F6);
+    background: #FFF;
+    box-shadow: 0px 10px 110px 1px rgba(59, 59, 59, 0.08);
+}
+
+.reviewmodal .modal-body {
+    display: flex;
+    width: 502px;
+    height: 409px;
+    padding: 20px 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 21px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid var(--6, #F4F5F6);
+    background: #FFF;
+    box-shadow: 0px 10px 110px 1px rgba(59, 59, 59, 0.08);
+}
+
+
+.bulkModal .modal-body {
+    display: flex;
+    width: 502px;
+    height: 255px;
+    padding: 20px 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 33px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid var(--6, #F4F5F6);
+    background: #FFF;
+}
+
+
+.bulkModal .modal-content {
+    display: flex;
+    width: 502px;
+    height: 255px;
+    padding: 20px 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 33px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid var(--6, #F4F5F6);
+    background: #FFF;
+}
+
+
+.goingBackModal .modal-body {
+    display: flex;
+    width: 502px;
+    height: 255px;
+    padding: 20px 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid var(--6, #F4F5F6);
+    background: #FFF;
+}
+
+.goingBackModal .modal-content {
+    display: flex;
+    width: 502px;
+    height: 255px;
+    padding: 20px 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid var(--6, #F4F5F6);
+    background: #FFF;
+}
+
+.contactDetailSingleModal .modal-dialog {
+    max-width: 1096px;
+    min-height: 930px;
+    border-radius: 20px;
+    background: #FFF;
+    overflow: hidden;
+}
+
+.contactDetailSingleModal .modal-content {
+    width: 100%;
+    height: 100%;
+}
+
+.multipleUsersModal .modal-dialog {
+    max-width: 1096px;
+    height: 641px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: #FFF;
+
+    box-shadow: 0px 4px 20px 0px rgba(238, 238, 238, 0.50);
+}
+
+.multipleUsersModal .modal-content {
+    width: 100%;
+    height: 100%;
+}
+
+
+.contactDetailsModal .modal-dialog {
+    max-width: 1096px;
+    height: 930px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: #FFF;
+    box-shadow: 0px 4px 20px 0px rgba(238, 238, 238, 0.50);
+}
+
+.contactDetailsModal .modal-content {
+    width: 100%;
+    height: 100%;
+}
+
+
+.overwriteModal .modal-dialog {
+    width: 502px;
+    height: 807px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid var(--6, #F4F5F6);
+    background: #FFF;
+    box-shadow: 0px 10px 110px 1px rgba(59, 59, 59, 0.08);
+}
+
+.overwriteModal .modal-content {
+    width: 100%;
+    height: 100%;
+}
+
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.overwriteSmall .modal-dialog {
+    max-width: 502px;
+}
+
+
+
+.overwriteSmall .modal-content {
+    width: 100%;
+    height: 100%;
+    height: 255px;
+    border-radius: 10px;
+    border: 1px solid var(--6, #F4F5F6);
+    background: #FFF;
+    box-shadow: 0px 10px 110px 1px rgba(59, 59, 59, 0.08);
+
+}
+
+.overwriteSmall .modal-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.heightBox {
+    height: 72px !important;
+    line-height: 72px !important;
+    margin-top: 1.5rem !important;
+}
+
+.subsName::first-letter {
+    text-transform: uppercase;
+}
+
+.table01 .subsName {
+    text-transform: lowercase !important;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+.custom-menu.custom-new {
+    min-width: 100% !important;
+    max-width: 100% !important;
+}
+
+.custom-menu.custom-new .subscriptionsCard .subscriptionsTable table th {
+    background-color: transparent !important;
+    height: auto !important;
+}
+
+.custom-menu.custom-new .subscriptionsCard .subscriptionsTable table td {
+    height: auto !important;
+    text-align: left !important;
+    border-bottom: none !important;
+}
+
+.custom-menu.custom-new .subscriptionsCard .subscriptionsTable th {
+    width: 150px !important;
+    min-width: 150px !important;
+    max-width: 150px !important;
+
+}
+
+.custom-menu.custom-new .subscriptionsCard .subscriptionsTable table th:nth-child(2) {
+    width: 120px !important;
+    min-width: 120px !important;
+    max-width: 120px !important;
+}
+
+.menu-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px
+}
+
+.menu-wrapper .cor-subs-text {
+    color: #313131;
+    text-align: center;
+    font-family: "Circular Std";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 450;
+    line-height: 130%;
+    cursor: pointer;
+}
+
+.menu-wrapper .cor-subs-text-active {
+    color: #19B3B5;
+    text-align: center;
+    font-family: "Circular Std";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 450;
+    line-height: 130%;
+    cursor: pointer;
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+
+    .multipleUsersModal .modal-dialog,
+    .contactDetailSingleModal .modal-dialog {
+        max-width: 100%;
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+}
+
+@media (max-width: 767px) and (min-width: 320px) {
+
+    .bulkModal .modal-content,
+    .bulkModal .modal-body,
+    .goingBackModal .modal-content,
+    .goingBackModal .modal-body {
+        width: 100%;
+        height: 280px;
+    }
+}

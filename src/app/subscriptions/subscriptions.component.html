@@ -1,0 +1,866 @@
+<div class="page_wrapper">
+    <div *ngIf="loading" class="loader_wrapper">
+        <img [src]="loader" alt="Loader" />
+    </div>
+    <div *ngIf="acceptReject" aria-live="polite" aria-atomic="true"
+        class="d-flex justify-content-center align-items-center w-100 hk_toast subs_page">
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img [src]="toasticon" class="rounded me-2" alt="..." />
+                <strong class="me-auto" *ngIf="rejectSign">Subscription rejected
+                    successfully</strong>
+                <strong class="me-auto" *ngIf="acceptSign">Subscription approved
+                    successfully</strong>
+            </div>
+        </div>
+    </div>
+    <div class="topbar_wrapper">
+        <div class="notificationToast">
+            <a href="tel:021111111111" className="d-flex align-items-center">
+                <img [src]="call" alt="Logo" />
+                (021)-111-111-111
+            </a>
+        </div>
+    </div>
+    <div class="logo_wrapper">
+        <div class="row">
+            <div class="col-sm-6 col-md-9 d-flex align-items-sm-center gap-4">
+                <div class="logo_area">
+                    <img [src]="logoImage" alt="Logo" />
+                </div>
+
+                <div class="menu-wrapper">
+                    <h5 class="cor-subs-text" [ngClass]="{'cor-subs-text-active': isActive('/corporate-subscription')}"
+                        routerLink="/corporate-subscription">
+                        Corporate Subscription
+                    </h5>
+                    <h5 class="cor-subs-text" [ngClass]="{'cor-subs-text-active': isActive('/subscription')}"
+                        routerLink="/subscription">
+                        Subscriptions
+                    </h5>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="logo_area text-right">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <span>A</span>
+                            <img [src]="arrowDown" alt="Logo" />
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="middleTabsCom bg-light1 pt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-10 mx-auto pt-5">
+                    <ul class="nav nav-tabs tabs_history" id="myTab" role="tablist"
+                        [class.adminRole]="userRole == 'user-type-four' || userRole == 'user-type-two'">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                                type="button" role="tab" aria-controls="home" aria-selected="true">
+                                Add New
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation" *ngIf="userRole == 'user-type-four'">
+                            <button class="nav-link" id="bulk-tab" data-bs-toggle="tab" data-bs-target="#bulking"
+                                type="button" role="tab" aria-controls="bulking" aria-selected="false">
+                                Bulk Upload
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation" *ngIf="userRole == 'user-type-two'">
+                            <button class="nav-link" id="manual-tab" data-bs-toggle="tab" data-bs-target="#manual"
+                                type="button" role="tab" aria-controls="manual" aria-selected="false">
+                                Manage Subscription
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                                type="button" role="tab" aria-controls="profile" aria-selected="false">
+                                History
+                            </button>
+                        </li>
+                    </ul>
+                    <div class="bg-white box_tabs main_wraper mt-4">
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="pd-4">
+                                    <div class="form_sucsess mt-5" *ngIf="showAnotherDiv">
+                                        <div class="text-center">
+                                            <img [src]="error" alt="icon" *ngIf="receiptApiError"
+                                                style="margin-bottom: 30px;" />
+                                            <img [src]="icon01" alt="icon" *ngIf="!receiptApiError"
+                                                style="margin-bottom: 30px;" />
+
+                                            <h4 class="mt-5" *ngIf="receiptApiError">Unsuccessful</h4>
+                                            <h4 class="mt-5" *ngIf="!receiptApiError">
+                                                Subscription enabled successfully
+                                            </h4>
+
+                                            <p class="mt-3" *ngIf="receiptApiError">
+                                                Your request could not be
+                                                processed at this time. Please
+                                                try again.
+                                            </p>
+                                            <!-- <p class="mt-3" *ngIf="!receiptApiError">
+                                                {{ receiptData.username }} has
+                                                successfully subscribed
+                                                to {{ receiptData.name }}
+                                                {{ receiptData.duration }}
+                                                package.
+                                            </p> -->
+                                        </div>
+                                        <div class="subscriptionDetails mt-5">
+                                            <h6>Subscription Details</h6>
+                                            <hr />
+                                            <ul class="p-0 list-unstyled subsList">
+                                                <li>
+                                                    <div class="d-flex align-items-center">
+                                                        <img [src]="icon001" alt="icon" />
+                                                        <p class="mb-0">Name</p>
+                                                    </div>
+                                                </li>
+                                                <li>{{ receiptData.username
+                                                    }}</li>
+                                                <li>
+                                                    <div class="d-flex align-items-center">
+                                                        <img [src]="icon002" alt="icon" />
+                                                        <p class="mb-0">Contact</p>
+                                                    </div>
+                                                </li>
+                                                <li>{{ receiptData.phone }}</li>
+                                                <li>
+                                                    <div class="d-flex align-items-center">
+                                                        <img [src]="icon003" alt="icon" />
+                                                        <p class="mb-0">Subscription</p>
+                                                    </div>
+                                                </li>
+                                                <li>{{ receiptData.name }}</li>
+                                                <li>
+                                                    <div class="d-flex align-items-center">
+                                                        <img [src]="icon004" alt="icon" />
+                                                        <p class="mb-0">Duration</p>
+                                                    </div>
+                                                </li>
+                                                <li>{{ receiptData.duration
+                                                    }}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <form class
+                                        (submit)="createSubsObj.paid_via !== 'Apply Promo Code' && promocodeShow !== true && onCreateSubs($event)"
+                                        *ngIf="!showAnotherDiv">
+                                        <div class="row">
+                                            <div class="col-12 col-lg-12">
+                                                <h2 class="heaging2">Contact Details</h2>
+                                                <hr class="hr" />
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Phone
+                                                        Number*</label>
+                                                    <div class="d-flex">
+                                                        <div class="col1 pe-0">
+                                                            <select class="form-select form-01">
+                                                                <option>+92</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col2">
+                                                            <input type="tel" name="phone"
+                                                                class="form-control form-01 inputs_fields_phone"
+                                                                placeholder="Enter mobile number"
+                                                                [(ngModel)]="createSubsObj.phone" maxlength="10"
+                                                                (keydown)="validatePhoneNumber($event)" required />
+                                                            <span class="numberChecButton"
+                                                                (click)="onNumberChecker($event)">Check</span>
+                                                            <div
+                                                                *ngIf="!createSubsObj.phone ||createSubsObj.phone.length < 10 ">
+                                                                <p class="error_red">{{
+                                                                    phoneNumberError
+                                                                    }}</p>
+                                                            </div>
+                                                            <div>
+                                                                <p class="error_red" *ngIf="!numberVerifySuccess">
+                                                                    {{
+                                                                    phoneNumberVerifyError
+                                                                    }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Full
+                                                        Name*</label>
+                                                    <input type="text" [disabled]="!userNotExist" name="name"
+                                                        class="form-control form-01 inputs_fields" required
+                                                        placeholder="Enter full name" [(ngModel)]="createSubsObj.name"
+                                                        maxlength="30" (keyup)="restrictNumericInput()"
+                                                        pattern="[a-zA-Z ]*" />
+                                                    <div *ngIf="nameContainsNumbers">
+                                                        Please enter only
+                                                        alphabetic characters.
+                                                    </div>
+                                                    <div *ngIf="!createSubsObj.name">
+                                                        <p class="error_red">{{
+                                                            nameError }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="wraping-fileds">
+                                                <div class="mb-3">
+                                                    <label class="form-label">City*</label>
+                                                    <select [disabled]="!userNotExist"
+                                                        class="form-select form-01 inputs_fields select_inputs" required
+                                                        name="city" [(ngModel)]="createSubsObj.city">
+                                                        <option value selected>
+                                                            Select city
+                                                        </option>
+                                                        <option *ngFor="let city of cities" [value]="city.id">
+                                                            {{ city.name }}
+                                                        </option>
+                                                    </select>
+
+                                                    <div *ngIf="!createSubsObj.city">
+                                                        <p class="error_red">{{
+                                                            cityError }}</p>
+                                                    </div>
+                                                </div>
+
+                                                <!-- cnic -->
+                                                <div class="mb-3">
+                                                    <label class="form-label">CNIC</label>
+                                                    <input [disabled]="!userNotExist" (input)="onInputCnic($event)"
+                                                        placeholder="CNIC number" type="text" maxlength="13"
+                                                        [(ngModel)]="createSubsObj.cnic"
+                                                        class="form-control form-01 inputs_fields inputs_fields_cnic"
+                                                        required name="cnic" />
+                                                </div>
+                                                <!-- DOB -->
+                                                <div class="mb-3 ">
+                                                    <label class="form-label">D.O.B</label>
+                                                    <div class="position-relative dateFix">
+                                                        <input [disabled]="!userNotExist" (change)="onChangeDob($event)"
+                                                            class="form-control form-01 inputs_fields inputs_fields_dob icossss"
+                                                            placeholder="Date of birth" type="text" min="1900-01-01"
+                                                            max="9999-12-31" required name="dob"
+                                                            onfocus="(this.type='date')" onblur="(this.type='date')"
+                                                            [(ngModel)]="createSubsObj.dob" />
+                                                    </div>
+                                                    <p class="error_red">{{dobError}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-5">
+                                            <div class="col-12 col-lg-12">
+                                                <h2 class="heaging2">Subscription
+                                                    Details</h2>
+                                                <hr class="hr" />
+                                                <div class="row">
+                                                    <div class="col-12 col-lg-6">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Duration*</label>
+                                                            <select [disabled]="!userNotExist"
+                                                                class="form-select form-01 select_inputs" required
+                                                                name="duration" [(ngModel)]="createSubsObj.duration"
+                                                                (change)="onChangeDuration($event)">
+                                                                <option value disabled selected>
+                                                                    Select
+                                                                    duration
+                                                                </option>
+                                                                <option *ngFor="let duration of durationSubs"
+                                                                    [value]="duration">
+                                                                    {{ duration
+                                                                    }}
+                                                                </option>
+                                                            </select>
+
+                                                            <div *ngIf="!createSubsObj.duration">
+                                                                <p class="error_red">{{
+                                                                    durationError
+                                                                    }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-lg-6">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Subscription
+                                                                Type*</label>
+                                                            <select [disabled]="!userNotExist"
+                                                                class="form-select form-01 select_inputs" required
+                                                                name="subscription_id"
+                                                                [(ngModel)]="createSubsObj.subscription_id"
+                                                                (change)="onChangeSubs($event)">
+                                                                <option value disabled selected>
+                                                                    Select
+                                                                    subscription
+                                                                    type
+                                                                </option>
+                                                                <option *ngFor="let subscription of subsTypes"
+                                                                    [value]="subscription.id">
+                                                                    {{
+                                                                    subscription.name
+                                                                    }}
+                                                                </option>
+                                                            </select>
+
+                                                            <div *ngIf="!createSubsObj.subscription_id">
+                                                                <p class="error_red">{{
+                                                                    subscriptionError
+                                                                    }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div *ngIf="packageDetailsStatus" class="card_info">
+                                                        <div class="left">
+                                                            <div class="heading">
+                                                                <h3 class="pkg_name">
+                                                                    {{
+                                                                    packageDuration
+                                                                    }}
+                                                                    {{
+                                                                    this.packageDetails.name
+                                                                    }}
+                                                                </h3>
+                                                                <h3 class="pkg_name pkg_price">
+                                                                    PKR
+                                                                    {{ this.packageDetails.price }}
+                                                                </h3>
+                                                            </div>
+                                                            <div class="wraping_info">
+                                                                <div class="info_left">
+                                                                    <div class="single">
+                                                                        <img [src]="consults" alt="Logo" />
+                                                                        <h4 class="consult_info_head">
+                                                                            Dr.
+                                                                            Consult
+                                                                            -
+                                                                            Video
+                                                                            Call
+                                                                        </h4>
+                                                                    </div>
+                                                                    <h4 class="num_left">
+                                                                        {{this.packageDetails.free_video_consults}}</h4>
+                                                                </div>
+                                                                <div class="info_left">
+                                                                    <div class="single">
+                                                                        <img [src]="vitals" alt="Logo" />
+                                                                        <h4 class="item">Vital
+                                                                            Scan</h4>
+                                                                    </div>
+                                                                    <h4 class="num_left">{{
+                                                                        this.packageDetails.scan_limit
+                                                                        }}</h4>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="right">
+                                                            <div class="heading-right">
+                                                                <img [src]="health_insurance" alt="Logo" />
+                                                                <h3 class="title_health">Health
+                                                                    Insurance</h3>
+                                                            </div>
+                                                            <div class="wraping_info-right">
+                                                                <div class="info_right info_health">
+                                                                    <span class="health_info_desc">
+                                                                        Daily
+                                                                        limit
+                                                                    </span>
+                                                                    <h4 class="num_left">PKR {{
+                                                                        this.packageDetails.health_insurrance_daily_limit
+                                                                        }}</h4>
+                                                                </div>
+                                                                <div class="info_right info_health">
+                                                                    <span class="health_info_desc">
+                                                                        Daily
+                                                                        ICU
+                                                                    </span>
+                                                                    <h4 class="right-price">PKR {{
+                                                                        this.packageDetails.health_insurrance_daily_icu
+                                                                        }}</h4>
+                                                                </div>
+                                                                <div class="info_right info_health">
+                                                                    <span class="health_info_desc">
+                                                                        Accidental
+                                                                        Coverage
+                                                                    </span>
+                                                                    <h4 class="right-price">PKR {{
+                                                                        this.packageDetails.health_insurance_accidental_coverage
+                                                                        }}</h4>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-6">
+                                                        <!-- input promocode starts -->
+                                                        <!-- {{this.createSubsObj.paid_via}} -->
+                                                        <div class="inptWrapper"
+                                                            *ngIf="this.createSubsObj.paid_via == 'Apply Promo Code' && promocodeShow == true">
+                                                            <input type="text" name="promocode"
+                                                                placeholder="Enter Promo Code" class="inptPromo"
+                                                                [(ngModel)]="createSubsObj.promocode">
+                                                            <span class="cross_svg" (click)="onCrossClick()"></span>
+                                                        </div>
+                                                        <p class="error_red">{{ promocodeError }}</p>
+                                                        <!-- input promocode ends -->
+                                                        <div class="mb-3"
+                                                            *ngIf="this.createSubsObj.paid_via !== 'Apply Promo Code' && promocodeShow !== true">
+                                                            <label class="form-label d-none">Paid via*</label>
+                                                            <select [disabled]="!userNotExist"
+                                                                class="form-select form-01 select_inputs heightBox"
+                                                                required name="paid_via"
+                                                                [(ngModel)]="createSubsObj.paid_via"
+                                                                (change)="onPaymentMethodChange($event)">
+                                                                <option value disabled selected>
+                                                                    Select
+                                                                    payment
+                                                                </option>
+                                                                <option *ngFor="let cards of paymentCards"
+                                                                    [value]="cards">
+                                                                    {{ cards }}
+                                                                </option>
+                                                            </select>
+                                                            <div *ngIf="!createSubsObj.paid_via">
+                                                                <p class="error_red">{{
+                                                                    paidViaError
+                                                                    }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-6">
+                                                        <div class="checkboxcolum"
+                                                            [class.mt-4]="this.createSubsObj.paid_via !== 'Apply Promo Code'">
+                                                            <div class="checkboxBox">
+                                                                <input [disabled]="!userNotExist" type="checkbox"
+                                                                    name="followupcall" />
+                                                                <label>User
+                                                                    needs
+                                                                    followup
+                                                                    call for
+                                                                    more product
+                                                                    knowledge</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-12 text-center">
+                                                        <button
+                                                            *ngIf="this.createSubsObj.paid_via !== 'Apply Promo Code' && !promocodeShow == true"
+                                                            class="bubmit_button mt-4" [disabled]=""
+                                                            [class.disabled-button]="" (click)="onDoneClick()">
+                                                            Done
+                                                        </button>
+                                                        <button
+                                                            *ngIf="this.createSubsObj.paid_via == 'Apply Promo Code' && promocodeShow == true"
+                                                            class="bubmit_button mt-4" [disabled]=""
+                                                            [class.disabled-button]="" (click)="promocodeCheck()">
+                                                            Done
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="manual" role="tabpanel" aria-labelledby="manual-tab">
+                                <div class="table-responsive table01 tableSpacing01">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Contact</th>
+                                                <th scope="col">Subscription</th>
+                                                <th scope="col">Duration</th>
+                                                <th scope="col">Request Date</th>
+                                                <th scope="col">Request User</th>
+                                                <th scope="col">
+                                                    <span *ngIf="userRole !== 'customer-support'">
+                                                        Action
+                                                    </span>
+                                                    <span *ngIf="userRole == 'customer-support'">
+                                                        Status
+                                                    </span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr *ngFor="let historyItemManager of subsHistoryManager">
+                                                <td>{{
+                                                    historyItemManager.username
+                                                    }}</td>
+                                                <td>{{ historyItemManager.phone
+                                                    }}</td>
+                                                <td class="subsName">{{ historyItemManager.name
+                                                    }}</td>
+                                                <td>{{
+                                                    historyItemManager.duration
+                                                    }}</td>
+                                                <td>{{
+                                                    historyItemManager.request_date
+                                                    }}</td>
+                                                <td>{{
+                                                    historyItemManager.request_user
+                                                    }}</td>
+                                                <td>
+                                                    <div class="statusBtns">
+                                                        <button class="btn btn1" (click)="
+                                rejectSubscription(historyItemManager.id)
+                              ">
+                                                            Reject
+                                                        </button>
+                                                        <button class="btn btn2" (click)="
+                                approveSubscription(historyItemManager.id)
+                              ">
+                                                            Approve
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="table-responsive table01 test">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Contact</th>
+                                                <th scope="col">Subscription</th>
+                                                <th scope="col">Duration</th>
+                                                <th scope="col">Request Date</th>
+                                                <th scope="col">Last Updated</th>
+                                                <th scope="col">Request User</th>
+                                                <th scope="col">Approver</th>
+                                                <th scope="col">Approved On</th>
+                                                <th scope="col">
+                                                    Status
+                                                    <div class="d-none">Action</div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let historyItem of subsHistory">
+                                                <td>{{ historyItem.username
+                                                    }}</td>
+                                                <td>{{ historyItem.phone }}</td>
+                                                <td class="subsName">{{ historyItem.name }}</td>
+                                                <td>{{ historyItem.duration}}</td>
+                                                <td>{{ historyItem.request_date}}</td>
+                                                <td>{{ historyItem.request_last_update}}</td>
+                                                <td>{{ historyItem.request_user}}</td>
+                                                <td>{{ historyItem.approved}}</td>
+                                                <td>{{ historyItem.approved_on}}</td>
+                                                <td>
+                                                    <span [ngClass]="{
+                                status: true,
+                                approve: historyItem.progress === 'Approved',
+                                pending: historyItem.progress === 'Pending',
+                                reject: historyItem.progress === 'Rejected'
+                            }">
+                                                        {{ historyItem.progress
+                                                        }}
+                                                    </span>
+                                                    <!-- <div class="statusBtns" *ngIf="userRole == 'customer-support'">
+                                                                                    <button class="btn btn1">Reject</button>
+                                                                                    <button class="btn btn2">Approved</button>
+                                                                                </div> -->
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="btn_wrapper">
+                                        <a class="confirmPubBtn"> DOWNLOAD </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade bulk-main" id="bulking" role="tabpanel"
+                                aria-labelledby="bulk-tab">
+                                <div class="info_wrapper_bulk">
+                                    <div class="col-12 col-lg-12">
+                                        <h2 class="heaging2  ">Subscription Details</h2>
+                                        <hr class="hr" />
+                                        <div class="row">
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Duration*</label>
+                                                    <select class="form-select form-01 select_inputs" required
+                                                        name="duration" [(ngModel)]="createSubsObj.duration"
+                                                        (change)="onChangeDuration($event)">
+                                                        <option value disabled selected>
+                                                            Select
+                                                            Duration
+                                                        </option>
+                                                        <option *ngFor="let duration of durationSubs"
+                                                            [value]="duration">
+                                                            {{ duration
+                                                            }}
+                                                        </option>
+                                                    </select>
+
+                                                    <div *ngIf="bulkErrorListener && !createSubsObj.duration">
+                                                        <p class="error_red">{{
+                                                            durationError
+                                                            }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Valid From*</label>
+                                                    <div class="position-relative dateFix ">
+                                                        <input (change)="startFrom($event)" placeholder="Select date"
+                                                            type="text" min="1900-01-01" max="9999-12-31"
+                                                            onfocus="(this.type='date')" onblur="(this.type='date')"
+                                                            class="form-control form-01 inputs_fields icossss"
+                                                            [(ngModel)]="onBulkUpload.valid_from" required name="dob" />
+                                                    </div>
+                                                    <div *ngIf="!onBulkUpload.valid_from || validDateError">
+                                                        <p class="error_red">{{validDateError}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Subscription
+                                                        Type*</label>
+                                                    <select class="form-select form-01 select_inputs" required
+                                                        name="subscription_id"
+                                                        [(ngModel)]="createSubsObj.subscription_id"
+                                                        (change)="onChangeSubs($event)">
+                                                        <option value disabled selected>
+                                                            Select
+                                                            subscription
+                                                            type
+                                                        </option>
+                                                        <option *ngFor="let subscription of subsTypes"
+                                                            [value]="subscription.id">
+                                                            {{
+                                                            subscription.name
+                                                            }}
+                                                        </option>
+                                                    </select>
+
+                                                    <div *ngIf="bulkErrorListener && !createSubsObj.subscription_id">
+                                                        <p class="error_red">{{
+                                                            subscriptionError
+                                                            }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Promo Code</label>
+                                                    <input type="text" name="promocode"
+                                                        class="form-control form-01 inputs_fields" required
+                                                        placeholder="Enter promo code "
+                                                        [(ngModel)]="onBulkUpload.promo_code" />
+                                                </div>
+                                            </div>
+                                            <div *ngIf="packageDetailsStatus && userRole == 'user-type-four'"
+                                                class="card_info">
+                                                <div class="left">
+                                                    <div class="heading">
+                                                        <h3 class="pkg_name">
+                                                            {{
+                                                            packageDuration
+                                                            }}
+                                                            {{
+                                                            this.packageDetails.name
+                                                            }}
+                                                        </h3>
+                                                        <h3 class="pkg_name pkg_price">
+                                                            PKR
+                                                            {{ this.packageDetails.price }}
+                                                        </h3>
+                                                    </div>
+
+                                                    <div class="wraping_info">
+                                                        <div class="info_left">
+                                                            <div class="single">
+                                                                <img [src]="consults" alt="Logo" />
+                                                                <h4 class="consult_info_head">
+                                                                    Dr.
+                                                                    Consult
+                                                                    -
+                                                                    Video
+                                                                    Call
+                                                                </h4>
+                                                            </div>
+                                                            <h4 class="num_left">
+                                                                {{this.packageDetails.free_video_consults}}</h4>
+                                                        </div>
+                                                        <div class="info_left">
+                                                            <div class="single">
+                                                                <img [src]="vitals" alt="Logo" />
+                                                                <h4 class="item">Vital
+                                                                    Scan</h4>
+                                                            </div>
+                                                            <h4 class="num_left">{{
+                                                                this.packageDetails.scan_limit
+                                                                }}</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="right">
+                                                    <div class="heading-right">
+                                                        <img [src]="health_insurance" alt="Logo" />
+                                                        <h3 class="title_health">Health
+                                                            Insurance</h3>
+                                                    </div>
+                                                    <div class="wraping_info-right">
+                                                        <div class="info_right info_health">
+                                                            <span class="health_info_desc">
+                                                                Daily
+                                                                limit
+                                                            </span>
+                                                            <h4 class="num_left">PKR {{
+                                                                this.packageDetails.health_insurrance_daily_limit
+                                                                }}</h4>
+                                                        </div>
+                                                        <div class="info_right info_health">
+                                                            <span class="health_info_desc">
+                                                                Daily
+                                                                ICU
+                                                            </span>
+                                                            <h4 class="right-price">PKR {{
+                                                                this.packageDetails.health_insurrance_daily_icu
+                                                                }}</h4>
+                                                        </div>
+                                                        <div class="info_right info_health">
+                                                            <span class="health_info_desc">
+                                                                Accidental
+                                                                Coverage
+                                                            </span>
+                                                            <h4 class="right-price">PKR {{
+                                                                this.packageDetails.health_insurance_accidental_coverage
+                                                                }}</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="btnWrrapingBulk">
+                                                <a (click)="downloadTemplate()"> Download Template </a>
+                                                <div *ngIf="!uploadedFileName" class="wrapeCsv">
+                                                    <input type="file" (change)="onFileSelected($event)"
+                                                        id="csvUploadFile" class="inptCsv" accept=".csv" />
+                                                    <label for="csvUploadFile" class="uploadCsv">Upload CSV</label>
+                                                </div>
+
+                                                <div *ngIf="uploadedFileName" class="uploadedFile">
+                                                    <div>
+                                                        <img [src]="csvIcon" alt="Logo" class="file_icon" /> <span> {{
+                                                            uploadedFileName }}</span>
+                                                    </div>
+
+                                                    <button (click)="removeFile()" class="cross_icon"><img [src]="cross"
+                                                            alt="Logo" /></button>
+                                                </div>
+
+                                                <div *ngIf="uploadedFileName" (click)="onBulkUploadFileCheck($event)"
+                                                    class="continue_button">
+                                                    <span>CONTINUE</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review Modal -->
+        <div class="reviewmodal modal fade" id="reviewmodal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <span data-bs-dismiss="modal" class="cross_svg_review"></span>
+                        <h2 class="reviewHeading">Review Information</h2>
+                        <div class="wraperInfoReview">
+                            <div class="single">
+                                <span class="packaging_span"> Package subscribed</span>
+                                <h4>{{this.promocodeVerifyDetails && this.promocodeVerifyDetails.package_subscribed}}
+                                    {{packageDuration}}</h4>
+                            </div>
+                            <div class="single">
+                                <span class="packaging_span"> Cost</span>
+                                <h4>PKR {{this.promocodeVerifyDetails && this.promocodeVerifyDetails.cost}}</h4>
+                            </div>
+                            <div class="single">
+                                <span class="packaging_span"> Promo (MS20%OFF) </span>
+                                <h4>PKR {{this.promocodeVerifyDetails && this.promocodeVerifyDetails.promo}}</h4>
+                            </div>
+                        </div>
+                        <div class="totalWraper">
+                            <span class="packaging_span"> Amount to collect </span>
+                            <h4>PKR {{this.promocodeVerifyDetails && this.promocodeVerifyDetails.amount_to_collect}}
+                            </h4>
+                        </div>
+                        <div class="blcVia"
+                            *ngIf="this.promocodeVerifyDetails && this.promocodeVerifyDetails.amount_to_collect >= 1">
+                            <h4>Balance collected via</h4>
+                            <select class="form-select form-01 inputs_fields_padVia select_inputs" required
+                                name="paid_via" [(ngModel)]="createSubsObj.paid_via"
+                                (change)="onPaymentMethodChange($event)">
+                                <option value="" disabled selected>
+                                    Paid Via
+                                </option>
+                                <ng-container *ngFor="let card of paymentCards">
+                                    <option *ngIf="card !== 'Apply Promo Code'" [value]="card">
+                                        {{ card }}
+                                    </option>
+                                </ng-container>
+                            </select>
+                        </div>
+                        <!-- no ballance -->
+
+                        <p *ngIf="this.promocodeVerifyDetails && this.promocodeVerifyDetails.amount_to_collect <= 0"
+                            class="no_balance"> No Balance to be collected </p>
+                        <button class="doneReviewBtn" (click)="onCreateSubs($event)"
+                            [disabled]="this.promocodeVerifyDetails && this.promocodeVerifyDetails.amount_to_collect > 0"
+                            [class.disabled-done]="this.promocodeVerifyDetails && this.promocodeVerifyDetails.amount_to_collect > 0">
+                            Done
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Review Modal ends -->
+
+        <!-- Important bulk Modal -->
+        <div class="bulkModal modal fade" id="bulkModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <span data-bs-dismiss="modal" class="cross_svg_review"></span>
+                        <h2 class="reviewHeading">Import Users</h2>
+                        <p class="para_desc">You are about to enable
+                            ({{this.csvFileChecker && this.csvFileChecker.subscription_name}}) for
+                            ({{this.csvFileChecker && this.csvFileChecker.user_count}}) users. Are you sure you want to
+                            continue?
+                        </p>
+                        <div class="btnWraperbulk">
+                            <button class="cancelBulkBtn" data-bs-dismiss="modal">
+                                CANCEL </button>
+                            <button class="confirmBulkBtn" (click)="onBulkFileUploader($event)"> Confirm </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Important bulk Modal ends -->
+    </div>

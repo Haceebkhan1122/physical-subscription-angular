@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap');
+
+@font-face {
+    font-family: 'Circular Std';
+    src: url('../assets/fonts/circular/CircularSpotifyText-Light.eot');
+    src: url('../assets/fonts/circular/CircularSpotifyText-Light.eot?#iefix') format('embedded-opentype'),
+        url('../assets/fonts/circular/CircularSpotifyText-Light.woff2') format('woff2'),
+        url('../assets/fonts/circular/CircularSpotifyText-Light.woff') format('woff'),
+        url('../assets/fonts/circular/CircularSpotifyText-Light.ttf') format('truetype'),
+        url('../assets/fonts/circular/CircularSpotifyText-Light.svg#CircularSpotifyText-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Circular Std';
+    src: url('../assets/fonts/circular/CircularStd-Black.eot');
+    src: url('../assets/fonts/circular/CircularStd-Black.eot?#iefix') format('embedded-opentype'),
+        url('../assets/fonts/circular/CircularStd-Black.woff2') format('woff2'),
+        url('../assets/fonts/circular/CircularStd-Black.woff') format('woff'),
+        url('../assets/fonts/circular/CircularStd-Black.ttf') format('truetype'),
+        url('../assets/fonts/circular/CircularStd-Black.svg#CircularStd-Black') format('svg');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Circular Std';
+    src: url('../assets/fonts/circular/CircularStd-Book.eot');
+    src: url('../assets/fonts/circular/CircularStd-Book.eot?#iefix') format('embedded-opentype'),
+        url('../assets/fonts/circular/CircularStd-Book.woff2') format('woff2'),
+        url('../assets/fonts/circular/CircularStd-Book.woff') format('woff'),
+        url('../assets/fonts/circular/CircularStd-Book.ttf') format('truetype'),
+        url('../assets/fonts/circular/CircularStd-Book.svg#CircularStd-Book') format('svg');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Circular Std';
+    src: url('../assets/fonts/circular/CircularStd-Medium.eot');
+    src: url('../assets/fonts/circular/CircularStd-Medium.eot?#iefix') format('embedded-opentype'),
+        url('../assets/fonts/circular/CircularStd-Medium.woff2') format('woff2'),
+        url('../assets/fonts/circular/CircularStd-Medium.woff') format('woff'),
+        url('../assets/fonts/circular/CircularStd-Medium.ttf') format('truetype'),
+        url('../assets/fonts/circular/CircularStd-Medium.svg#CircularStd-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+@font-face {
+    font-family: 'Circular Std';
+    src: url('../assets/fonts/circular/CircularStd-Bold.eot');
+    src: url('../assets/fonts/circular/CircularStd-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../assets/fonts/circular/CircularStd-Bold.woff2') format('woff2'),
+        url('../assets/fonts/circular/CircularStd-Bold.woff') format('woff'),
+        url('../assets/fonts/circular/CircularStd-Bold.ttf') format('truetype'),
+        url('../assets/fonts/circular/CircularStd-Bold.svg#CircularStd-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: 'poppins-regular';
+    src: url('../assets/fonts/Poppins-Regular.ttf') format('embedded-opentype');
+    src: url('../assets/fonts/Poppins-Regular.ttf') format('woff2');
+    src: url('../assets/fonts/Poppins-Regular.ttf') format('woff');
+    src: url('../assets/fonts/Poppins-Regular.ttf') format('truetype');
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: 'nunito-regular';
+    src: url('../assets/fonts/Nunito-Regular.ttf') format('embedded-opentype');
+    src: url('../assets/fonts/Nunito-Regular.ttf') format('woff2');
+    src: url('../assets/fonts/Nunito-Regular.ttf') format('woff');
+    src: url('../assets/fonts/Nunito-Regular.ttf') format('truetype');
+    font-style: normal;
+    font-display: swap;
+}
+
+
+.overwriteModal .modal-dialog {
+    width: 100%;
+    max-width: 502px;
+    min-height: 784px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid var(--6, #F4F5F6);
+    background: #FFF;
+    box-shadow: 0px 10px 110px 1px rgba(59, 59, 59, 0.08);
+}
+
+.overwriteModal .modal-content {
+    width: 100%;
+    height: 100%;
+}
+
+.overwriteModal .modal-body { 
+    width: 100%;
+    height: 100%;
+}

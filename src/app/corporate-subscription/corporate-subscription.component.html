@@ -1,0 +1,287 @@
+<div class="page_wrapper">
+    <div *ngIf="loading" class="loader_wrapper">
+        <img [src]="loader" alt="Loader" />
+    </div>
+    <!-- <div *ngIf="acceptReject" aria-live="polite" aria-atomic="true"
+        class="d-flex justify-content-center align-items-center w-100 hk_toast subs_page">
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img [src]="toasticon" class="rounded me-2" alt="..." />
+                <strong class="me-auto" *ngIf="rejectSign">Subscription rejected
+                    successfully</strong>
+                <strong class="me-auto" *ngIf="acceptSign">Subscription approved
+                    successfully</strong>
+            </div>
+        </div>
+    </div> -->
+    <div class="topbar_wrapper">
+        <div class="notificationToast">
+            <a href="tel:021111111111" className="d-flex align-items-center">
+                <img [src]="call" alt="Logo" />
+                (021)-111-111-111
+            </a>
+        </div>
+    </div>
+    <div class="logo_wrapper">
+        <div class="row">
+            <div class="col-sm-6 col-md-9 d-flex align-items-sm-center gap-4">
+                <div class="logo_area">
+                    <img [src]="logoImage" alt="Logo" />
+                </div>
+
+                <div class="menu-wrapper">
+                    <h5 class="cor-subs-text" [ngClass]="{'cor-subs-text-active': isActive('/corporate-subscription')}"
+                        routerLink="/corporate-subscription">
+                        Corporate Subscription
+                    </h5>
+                    <h5 class="cor-subs-text" [ngClass]="{'cor-subs-text-active': isActive('/subscription')}"
+                        routerLink="/subscription">
+                        Subscriptions
+                    </h5>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="logo_area text-right">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <span>A</span>
+                            <img [src]="arrowDown" alt="Logo" />
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li (click)="logout()"><a class="dropdown-item">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content_corporateSubscriptions">
+        <h1 class="corpoHead"> Corporate Subscriptions </h1>
+
+        <hr class="hrrr" />
+        <div class="single_corpo">
+            <label for=""> Enter user number </label>
+            <input type="number" placeholder="Search by user number" (input)="onSearchInputChange($event)"
+                (keyup.enter)="onEnterKeySearchUser()" [(ngModel)]="onSearch.search_value" class="enter_user_inp" />
+        </div>
+        <!-- <div class="table_wraper_corpo">
+            <table>
+                <thead>
+                    <th> User Number </th>
+                    <th> Corporates  </th>
+                    <th> Subscription </th>
+                    <th> Status </th>
+                    <th> Action </th>
+                </thead>
+                <tbody>
+                    <td>  </td>
+                    <td>  </td>
+                    <td>  </td>
+                    <td>  </td>
+                    <td>  </td>
+                </tbody>
+            </table>
+        </div> -->
+
+        <div class="table_wrape_corpo spacingBottom">
+            <div class="table-responsive mainScroller">
+                <table class="table table-hover">
+                    <thead class="">
+                        <tr>
+                            <th scope="col">User Number</th>
+                            <th scope="col">Corporates</th>
+                            <th scope="col">Subscription</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hk_custom_hover" *ngIf="UserByUserNumber?.phone">
+                            <td> {{ UserByUserNumber?.phone }} </td>
+                            <td> {{ UserByUserNumber?.corporate }} </td>
+                            <td>
+                                <div class="wraper_plus_ico">
+                                    <span> {{ UserByUserNumber?.subscription }} </span>
+                                    <button class="info_icon">
+                                        <img [src]="info__svg" alt="Logo" />
+                                    </button>
+                                    <div class="custom-menu custom-new">
+                                        <div class="subscriptionsCard">
+                                            <h1>Subscriptions</h1>
+                                            <div class="subscriptionsTable">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th colspan="2"></th>
+                                                            <th>Remaining</th>
+                                                            <th>Availed</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td colspan="2">DoctorNow</td>
+                                                            <td>{{ UserByUserNumber?.doctor_now_remaining }}</td>
+                                                            <td>{{ UserByUserNumber?.doctor_now_availd }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">Scans</td>
+                                                            <td>{{ UserByUserNumber?.scans_remaining }}</td>
+                                                            <td>{{ UserByUserNumber?.scans_availd }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="subscriptionsTable">
+                                                <table>
+                                                    <thead>
+                                                        <tr class="">
+                                                            <th class="" colspan="2"></th>
+                                                            <th class="">Discount</th>
+                                                            <th class="">Max per transaction</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td colspan="2">Lab</td>
+                                                            <td>{{ UserByUserNumber?.lab_discount }}</td>
+                                                            <td>{{ UserByUserNumber?.lab_discount_max_transaction }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">Medicine</td>
+                                                            <td>{{ UserByUserNumber?.pharmacy_discount }}</td>
+                                                            <td>{{ UserByUserNumber?.pharmacy_max_transaction }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </td>
+                            <td> {{ UserByUserNumber?.status }} </td>
+                            <td>
+                                <div class="wraper_action_btn">
+                                    <button class="history_btn" data-bs-target="#historyModal" data-bs-toggle="modal"
+                                        (click)="gettingHistoryData()">History</button>
+                                    <button class="invoice_btn" data-bs-target="#invoiceModal"
+                                        [disabled]='UserByUserNumber && UserByUserNumber?.status == "Inactive" || !UserByUserNumber?.discount'
+                                        data-bs-toggle="modal"
+                                        [class.invoice-disablebtn]="UserByUserNumber && UserByUserNumber?.status == 'Inactive' || !UserByUserNumber?.discount">Invoice</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="emptyTab" *ngIf="UserByUserNumber == undefined || UserByUserNumber?.length === 0">
+                    <span class="fileSvg"></span>
+                    <span class="dsss"> No Data Available </span>
+                </div>
+            </div>
+        </div>
+
+
+        <!--  ----------------------------- history modal ------------------------------ -->
+        <div class="historymodal modal fade" id="historyModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <span data-bs-dismiss="modal" class="cross_svg_review"></span>
+                        <h2> History </h2>
+                        <div class="row gx-0 h-90">
+                            <div class="col-lg-6 left_his_modal">
+                                <h3> Labs </h3>
+                                <div class="table_history">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th> </th>
+                                                <th> Invoice No </th>
+                                                <th> Amount </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let history of historyDataByIdLabs">
+                                                <td> {{ history?.created_at }} </td>
+                                                <td> {{ history?.invoice }} </td>
+                                                <td> {{ history?.amount }} </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 right_his_modal">
+                                <h3> Medicines </h3>
+                                <div class="table_history">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th> </th>
+                                                <th> Invoice No </th>
+                                                <th> Amount </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let history of historyDataByIdMedicine">
+                                                <td> {{ history?.created_at }} </td>
+                                                <td> {{ history?.invoice }} </td>
+                                                <td> {{ history?.amount }} </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  ----------------------------- history modal ------------------------------ -->
+
+        <!--  ----------------------------- Invoice modal ------------------------------ -->
+        <div class="invoiceModal modal fade" id="invoiceModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true" (show.bs.modal)="onModalShow()" (hide.bs.modal)="onModalHide()">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h2 class="invoice_head_t"> Invoice </h2>
+                    <div class="wrape_invoice_modal">
+                        <div class="d-flex" style="gap: 56px;">
+                            <div class="single_in">
+                                <input type="radio" name="category" [(ngModel)]="selectedCategory" value="labs"
+                                    (change)="onCategoryChange('labs')" />
+                                <label> Labs </label>
+                            </div>
+                            <div class="single_in">
+                                <input type="radio" name="category" [(ngModel)]="selectedCategory" value="medicines"
+                                    (change)="onCategoryChange('medicines')" />
+                                <label> Medicines </label>
+                            </div>
+                        </div>
+                        <div class="single-v-fields">
+                            <label for=""> Invoice Number</label>
+                            <input type="text" placeholder="Enter number" [(ngModel)]="invoiceNumber" class="inpt_invoi" />
+                        </div>
+                        <div class="single-v-fields">
+                            <label for=""> Total Purchase Amount</label>
+                            <input type="text" placeholder="Enter amount" [(ngModel)]="totalPurchaseAmount" class="inpt_invoi" />
+                        </div>
+                        <div class="single-v-fields">
+                            <label for=""> Invoice Amount (After Discount)</label>
+                            <input type="text" placeholder="Enter amount" (input)="onSearchInvoiceAmountAfterDisc($event)"
+                                [(ngModel)]="onSearchInvoiceAmount.invoice_amount" class="inpt_invoi" />
+                        </div>
+                        <button class="btn__save" (click)="handleSaveInvoice()">
+                            Save
+                        </button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  ----------------------------- Invoice modal ------------------------------ -->
+    </div>
+</div>

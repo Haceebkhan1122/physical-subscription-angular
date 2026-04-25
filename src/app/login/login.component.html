@@ -1,0 +1,58 @@
+<div class="page_wrapper">
+    <div *ngIf="loading" class="loader_wrapper">
+        <img [src]="loader" alt="Loader" />
+    </div>
+    <div class="logo_wrapper">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="logo_area">
+                    <img [src]="logoImage" alt="Logo">
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="form_wrapper">
+        <div class="row">
+            <div class="col-md-12 col-lg-6">
+                <div class="image_wrapper">
+                    <img [src]="loginLeft" alt="Shahzad Saira">
+                </div>
+            </div>
+            <div class="col-md-8 col-lg-6">
+                <div class="form_hk">
+                    <form class="form_login" (submit)="onLogin($event)">
+                        <h3>Login</h3>
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label for="userId" class="form-label">User Name*</label>
+                                <input type="text" class="form-control" name="name" id="name"
+                                    placeholder="Enter user ID" [(ngModel)]="loginObj.name" required
+                                    (keyup)="checkNameLength()">
+                                <p class="error_red" *ngIf="nameError !== '' ">{{nameError}}</p>
+                            </div>
+                            <div class="col-md-12 mb-4">
+                                <label for="password" class="form-label">Password*</label>
+                                <input type="{{ hidePassword ? 'password' : 'text' }}" class="form-control"
+                                    id="password" [(ngModel)]="loginObj.password" name="password"
+                                    placeholder="Enter password" maxlength="20" (keyup)="checkPasswordLength()"
+                                    (keypress)="handleKeyPress($event)" required>
+
+                                <button class="icon_show_hide" (click)="togglePasswordVisibility($event)">
+                                    <span [innerHTML]="hidePassword ? getImageHTML() : getIconHTML()"></span>
+                                </button>
+                                <p class="error_red" *ngIf="passwordError !== '' ">
+                                   {{passwordError}}
+                                </p>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary hk">LOGIN</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <p class="versionss">V: 1.1.1</p>
+        </div>
+    </div>
+</div>
